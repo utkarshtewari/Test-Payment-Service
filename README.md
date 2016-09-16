@@ -1,4 +1,4 @@
-## Reacive Microservices
+## Reactive Microservices
 The high level of autonomy and isolation present in the Microservices Architecture pattern presents us with a problem of distributed data management. A microservice must be able to manage data consistency using transactions that are distributed across a network of many different applications and databases.
 
 This subproject uses Event Sourcing and Command Query Responsibility Segregation (CQRS) to implement an event-driven application.
