@@ -19,7 +19,8 @@ Architecture consists of 3 business services and backing services from Pilot-Mic
 * Screening Service
 * Accounting Service
 
-## <a name="event-scourcing"></a> Event Sourving is architecture pattern that reperesents state as series of events.
+## <a name="event-scourcing"></a> Event Sourcing 
+* Event Sourcing is architecture pattern that reperesents state as series of events.
 
 ## <a name="cqrs"></a> Command Query Responsibility Separation
 
