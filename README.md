@@ -12,12 +12,9 @@ This subproject uses Event Sourcing and Command Query Responsibility Segregation
 ## <a name="application-architecture"></a> Application Architecture
 Architecture consists of 3 business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file. This application has been created to demonstrate a reactive microservice architecture. 
 
-Payments service accepts a payment for execution. It creates an event PaymentAddedEvent in event store and publishes the same on event bus. It also consumes events published by Screening service and Accounting Service to update the payment events and the state of the payment being executed.
-
-Screening Service which is responsible for screening a payment, subscribes for PaymentAddedEvent, consumes the same and publishes PaymentScreenedEvent. 
-
-Accounting Service responsible for accouting a payment, consumes PaymentScreenedEvent and publishes PaymentAccountedEvent.
-
+* Payments Service accepts a payment for execution. It creates an event PaymentAddedEvent in event store and publishes the same on event bus. It also consumes events published by Screening service and Accounting Service to update the payment events and the state of the payment being executed.
+* Screening Service which is responsible for screening a payment, subscribes for PaymentAddedEvent, consumes the same and publishes PaymentScreenedEvent. 
+* Accounting Service responsible for accouting a payment, consumes PaymentScreenedEvent and publishes PaymentAccountedEvent.
 
 ![Reactive Microservices Architecture](Janus-ReactiveMicroservices.png)
 
