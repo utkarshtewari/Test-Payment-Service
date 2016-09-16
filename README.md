@@ -12,7 +12,7 @@ This subproject uses event driven architecture to decouple the services and uses
 * [Architecture Components](#architecture-components)
 * [Reactive Principles] (#reactive-principles) 
 * [Event Sourcing] (#event-sourcing) 
-* [Command Query Responsibility Separation] (#cqrs)
+* [Command Query Responsibility Segregation] (#cqrs)
 
 ## <a name="application-architecture"></a> Application Architecture
 Architecture consists of 3 business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file.  
@@ -32,9 +32,9 @@ Architecture consists of 3 business services and backing services from Pilot-Mic
 *
 
 ## <a name="event-scourcing"></a> Event Sourcing 
-* Event Sourcing is architecture pattern that reperesents state as series of events.
+* Event Sourcing is architecture pattern that represents state as series of events.
 
-## <a name="cqrs"></a> Command Query Responsibility Separation
+## <a name="cqrs"></a> Command Query Responsibility Segregation
 *
 
 ## Using the Application
