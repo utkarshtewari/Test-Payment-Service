@@ -20,13 +20,13 @@ The query-side microservice acts as an event-listener and a view. It listens for
 * Build the application by running the command: mvn clean install
 * Run the application by running the command: java -jar build/libs/payments-service-0.0.1-SNAPSHOT.jar
 
-Post a payment by invoking the service by using the below urls
-* http://localhost:9090/payments
+* Post a payment by invoking the service by using the below urls
+  * http://localhost:9090/payments
 
-Retrieve a list of Payments
-* http://localhost:9090/payments
+* Retrieve a list of Payments
+  * http://localhost:9090/payments
 
-##External Configuration
+## External Configuration
 The project derives it's configuration from the configuration-service. We have defined the spring.cloud.config.uri in the bootstrap.yml file and that tells the application where to pick up the external configurations. In our case, the URL points to the running configuration-service (http://localhost:8888). 
 
 Important dependencies in classpath
