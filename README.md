@@ -24,9 +24,9 @@ Architecture consists of 3 business services and backing services from Pilot-Mic
 ![Reactive Microservices Architecture](Janus-ReactiveMicroservices.png)
 
 ## <a name="architecture-components"></a> Architecture Components
-* Payments Service
-* Screening Service
-* Accounting Service
+* [Payments Service] (payments-service)
+* [Screening Service] (screening-service)
+* [Accounting Service] (accounting-service)
 
 ## <a name="reactive-principles"></a> Reactive Principles 
 *
