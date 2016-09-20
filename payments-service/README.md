@@ -1,13 +1,13 @@
 ## Overview
 Payments Service exposes REST endpoints to execute a payment and to retrieve a list of payments. It uses event sourcing and CQRS patterns. 
 
-Logical Architecture Diagram
+* The consumer interacts with the service in two ways: it sends a command to the service to execute a payment and it queries the service for a list of payments.
 
-The consumer interacts with the service in two ways: it sends a command to the service to execute a payment and it queries the service for a list of payments.
+* Command handler responds to a specific type of command and executes logic based on the contents of the command. The execution of these commands results in `Events` being generated which are persisted into MongoDB and propagated out to other services via RabbitMQ messaging.
 
-Command handler responds to a specific type of command and executes logic based on the contents of the command. The execution of these commands results in `Events` being generated which are persisted into MongoDB and propagated out to other services via RabbitMQ messaging.
+* The query-side microservice acts as an event-listener and a view. It listens for the `Events` being emitted by the command-side and processes them. It uses in-memory data store to store and retrieve the payments.
 
-The query-side microservice acts as an event-listener and a view. It listens for the `Events` being emitted by the command-side and processes them. It uses in-memory data store to store and retrieve the payments.
+![Payments Service Logical Architecture](PaymentsService-LogicalDiagram.png)
 
 ## Pre-requisites
 * Install MongoDB
