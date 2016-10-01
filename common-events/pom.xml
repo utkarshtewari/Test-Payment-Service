@@ -11,13 +11,6 @@
 	<name>common-events</name>
 	<description>Payments Common Events</description>
 
-	<!--<parent>
-		<groupId>reactive.eventdriven.example</groupId>
-		<artifactId>reactive-eventdriven-example</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>-->
-
 	<build>
         <plugins>
             <plugin>

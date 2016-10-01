@@ -88,7 +88,7 @@
 		    <version>3.6.5</version>
 		</dependency>
 		<dependency>
-		    <groupId>reactive.eventdriven.example</groupId>
+		    <groupId>microservices</groupId>
 		    <artifactId>common-events</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
