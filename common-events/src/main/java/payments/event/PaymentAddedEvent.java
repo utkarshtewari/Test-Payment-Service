@@ -44,7 +44,7 @@ public class PaymentAddedEvent implements Serializable {
 	
 	@Override
 	public String toString(){
-		return "PaymentAddedEvent: accountNumber:"+this.accountNumber+ "customerName:"+ this.customerName
+		return "PaymentAddedEvent: accountNumber:"+this.accountNumber+ " customerName:"+ this.customerName
 				+" customerId:"+this.customerId+ " amount:"+this.amount;
 	}
 }
