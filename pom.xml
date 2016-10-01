@@ -33,6 +33,9 @@
         <module>payments-service</module>
         <module>screening-service</module>
         <module>accounting-service</module>
+        
+        <module>accounting-command-service</module>
+        <module>accounting-query-service</module>
     </modules>
     
     <dependencyManagement>

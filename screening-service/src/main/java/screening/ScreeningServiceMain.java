@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
-@SuppressWarnings("deprecation")
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan

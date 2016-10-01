@@ -26,11 +26,17 @@ public class ScreeningEventHandler {
     public void handlePaymentAddedEvent(PaymentAddedEvent event, 
     		Message eventMessage, @Timestamp DateTime moment) {
 		
-		LOG.info("Received PaymentAddedEvent checking datasource:");
+		LOG.info("Received PaymentAddedEvent:"+event);
 		
 		String paymentId = event.getPaymentId();
 		
-		PaymentScreenedEvent screenedEvent = new PaymentScreenedEvent(paymentId, "SCREENED");
+		//PaymentScreenedEvent screenedEvent = new PaymentScreenedEvent(paymentId, "SCREENED");
+		
+		PaymentScreenedEvent screenedEvent = new PaymentScreenedEvent(paymentId, 
+				event.getAccountNumber(),
+				event.getCustomerId(),
+				event.getCustomerName(),
+				event.getAmount(),"SCREENED");
 		
 		eventBus.publish(GenericEventMessage.asEventMessage(screenedEvent));
 		

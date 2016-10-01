@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import payments.event.PaymentAddedEvent;
-import payments.event.PaymentScreenedEvent;
 import payments.event.PaymentAccountedEvent;
+import payments.event.PaymentAddedEvent;
 import payments.event.PaymentCanceledEvent;
+import payments.event.PaymentScreenedEvent;
+import accounts.event.AccountUpdatedEvent;
 
 
 @Component
@@ -84,5 +85,12 @@ public class PaymentEventHandler {
 		
 		
 	}
-
+	
+	@SuppressWarnings("rawtypes")
+	@EventHandler
+    public void handleAccountUpdatedEvent(AccountUpdatedEvent event, 
+    		Message eventMessage, @Timestamp DateTime moment) {
+		
+		LOG.info("Received AccountUpdatedEvent for Account Number:"+ event.getAccountNumber());
+	}
 }

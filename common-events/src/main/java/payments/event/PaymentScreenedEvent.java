@@ -56,6 +56,8 @@ public class PaymentScreenedEvent implements Serializable {
 
 	@Override
 	public String toString(){
-		return "PaymentScreenedEvent: payment id"+this.paymentId+" status:"+ this.status;
+		//return "PaymentScreenedEvent: payment id"+this.paymentId+" status:"+ this.status;
+		return "PaymentScreenedEvent: accountNumber:"+this.accountNumber+ " customerName:"+ this.customerName
+				+" customerId:"+this.customerId+ " amount:"+this.amount;
 	}
 }
