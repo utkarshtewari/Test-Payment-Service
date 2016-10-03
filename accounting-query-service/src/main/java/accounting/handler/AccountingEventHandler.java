@@ -32,13 +32,13 @@ public class AccountingEventHandler {
 		String accountNumber = event.getAccountNumber();
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String retrieveStatement = "SELECT balance from accounts where accountNumber = ? ";
+		String retrieveStatement = "SELECT balance from accounts where account_number = ? ";
 		Double balance = (Double)jdbcTemplate.queryForObject(retrieveStatement, new Object[] { accountNumber }, Double.class);
 		
 		// update account
 		//double balance = 10000;
 		double currentBalance = balance - event.getAmount();
-		String updateStatement = "UPDATE accounts SET balance = ? where accountNumber = ? ";
+		String updateStatement = "UPDATE accounts SET balance = ? where account_number = ? ";
 		jdbcTemplate.update(updateStatement, new Object[]{currentBalance, accountNumber});
 		LOG.info("Updated Balance for account:"+accountNumber);
 		

@@ -35,13 +35,15 @@ public class AccountsDaoImpl extends JdbcDaoSupport implements AccountsDao {
 		List<Account> accounts = new ArrayList<Account>();
 				
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String accountsQuery = "Select accountNumber, accountType, customerId, "
-				+ "balance from accounts";
+//		String accountsQuery = "Select accountNumber, accountType, customerId, "
+//				+ "balance from accounts";
+		
+		String accountsQuery = "Select account_number, account_type, customer_id, balance from accounts";
 		
 		jdbcTemplate.query(accountsQuery, 
-				(rs, rowNum) -> new Account(rs.getString("accountNumber"),
-				rs.getString("accountType"),
-				rs.getString("customerId"),
+				(rs, rowNum) -> new Account(rs.getString("account_number"),
+				rs.getString("account_type"),
+				rs.getString("customer_id"),
 				rs.getDouble("balance")))
 			.forEach(account -> accounts.add(account));
 		
