@@ -1,0 +1,1 @@
+CREATE TABLE ACCOUNTS(account_number VARCHAR2(30) PRIMARY KEY, account_type VARCHAR2(12), customer_id VARCHAR2(30), balance FLOAT)
