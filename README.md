@@ -5,7 +5,7 @@ A microservice must react to failure, react to load and react to user. It should
 
 To achieve the above properties, it is important to have an asynchronous boundary, that can provide decoupling of services. There are tried and tested patterns for successfully building and maintaining complex distributed systems using Event Sourcing and Command Query Responsibility Segregation (CQRS). 
 
-This sample project showcases ‘event-driven’ microservices to build distributed resilient applications using Event Sourcing and Command Query Responsibility Segregation (CQRS) patterns.
+This sample project showcases `event-driven` microservices to build distributed resilient applications using Event Sourcing and Command Query Responsibility Segregation (CQRS) patterns.
 
 ## Table of Contents
 * [Application Architecture](#application-architecture)
@@ -19,7 +19,7 @@ This project introduced is about a fictitious `Payment` execution application. P
 
 Architecture consists of business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file.  
 
-[Business services] (architecture-components) (Payments Service, Screening Service, Accounting Command Service and Accounting Query Service) communicate with each other through event passing to execute a payment. All communication between the microservices is purely `event-driven`. The events are passed between the microservice components using RabbitMQ messaging. They use EventStore to store the events and maintain a ‘materialised view’ which holds the latest state of an entity.
+[Business services] (architecture-components) (Payments Service, Screening Service, Accounting Command Service and Accounting Query Service) communicate with each other through event passing to execute a payment. All communication between the microservices is purely `event-driven`. The events are passed between the microservice components using RabbitMQ messaging. They use EventStore to store the events and maintain a `materialised view` which holds the latest state of an entity.
 
 ![Reactive Microservices Architecture](Janus-ReactiveMicroservices.png)
 
