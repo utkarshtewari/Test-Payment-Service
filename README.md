@@ -5,10 +5,6 @@ A microservice must react to failure, react to load and react to user. It should
 
 To achieve the above properties, it is important to have an asynchronous boundary, that can provide decoupling of services. There are tried and tested patterns for successfully building and maintaining complex distributed systems using Event Sourcing and Command Query Responsibility Segregation (CQRS). 
 
-This subproject uses event driven architecture to decouple the services and uses Event Sourcing and Command Query Responsibility Segregation (CQRS) to achieve data consistency.
-
-This sample project introduced here revolves around a fictitious `Payment` execution application. Payments can be added for payment execution, stored, retrieved from Payments data store using RESTful API service. As changes happen for example payment is screened and accounts are updated for the payment amount, notifications are sent to interested services using messaging.
-
 ## Table of Contents
 * [Application Architecture](#application-architecture)
 * [Architecture Components](#architecture-components)
@@ -17,6 +13,8 @@ This sample project introduced here revolves around a fictitious `Payment` execu
 * [Command Query Responsibility Segregation] (#cqrs)
 
 ## <a name="application-architecture"></a> Application Architecture
+This sample project introduced here revolves around a fictitious `Payment` execution application. Payments can be added for payment execution, stored, retrieved using RESTful API service. As changes happen for example payment screening and accounts updates for the payment amount, notifications are sent to interested services using messaging.
+
 Architecture consists of business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file.  
 
 * [Business services] (architecture-components) (Payments Service, Screening Service, Accounting Command Service and Accounting Query Service) communicate with each other through event passing to execute a payment. All communication between the microservices is purely `event-driven`. The events are passed between the microservice components using RabbitMQ messaging. They use EventStore to store the events and maintain a ‘materialised view’ which holds the latest state of an entity.
