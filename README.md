@@ -5,7 +5,7 @@ A microservice must react to failure, react to load and react to user. It should
 
 To achieve the above properties, it is important to have an asynchronous boundary, that can provide decoupling of services. There are tried and tested patterns for successfully building and maintaining complex distributed systems using Event Sourcing and Command Query Responsibility Segregation (CQRS). 
 
-This sample project showcases event-driven microservices to build distributed resilient applications using vent Sourcing and Command Query Responsibility Segregation (CQRS) patterns.
+This sample project showcases ‘event-driven’ microservices to build distributed resilient applications using Event Sourcing and Command Query Responsibility Segregation (CQRS) patterns.
 
 ## Table of Contents
 * [Application Architecture](#application-architecture)
