@@ -7,6 +7,8 @@ To achieve the above properties, it is important to have an asynchronous boundar
 
 This subproject uses event driven architecture to decouple the services and uses Event Sourcing and Command Query Responsibility Segregation (CQRS) to achieve data consistency.
 
+This sample project introduced here revolves around a fictitious `Payment` execution application. Payments can be added for payment execution, stored, retrieved from Payments data store using RESTful API service. As changes happen for example payment is screened and accounts are updated for the payment amount, notifications are sent to interested services using messaging.
+
 ## Table of Contents
 * [Application Architecture](#application-architecture)
 * [Architecture Components](#architecture-components)
@@ -15,9 +17,9 @@ This subproject uses event driven architecture to decouple the services and uses
 * [Command Query Responsibility Segregation] (#cqrs)
 
 ## <a name="application-architecture"></a> Application Architecture
-Architecture consists of 4 business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file.  
+Architecture consists of business services and backing services from Pilot-Microservices such as [Configuration Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/configuration-service/README.md) and [Discovery Service] (https://code.cognizant.com/mrudul-palvankar/Pilot-Microservices/blob/master/discovery-service/README.md). Each component is built separately using their own build file.  
 
-* [Business services] (architecture-components) (Payments Service, Screening Service, Accounting Command Service and Accounting Query Service) integrates with each other through message / event passing to execute a payment. All communication between the microservices is purely `event-driven`. The events are passed between the microservice components using RabbitMQ messaging. They use EventStore to store the events and maintain a materialized. 
+* [Business services] (architecture-components) (Payments Service, Screening Service, Accounting Command Service and Accounting Query Service) communicate with each other through event passing to execute a payment. All communication between the microservices is purely `event-driven`. The events are passed between the microservice components using RabbitMQ messaging. They use EventStore to store the events and maintain a ‘materialised view’ which holds the latest state of an entity.
 
 ![Reactive Microservices Architecture](Janus-ReactiveMicroservices.png)
 
