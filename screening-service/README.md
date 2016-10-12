@@ -10,4 +10,4 @@ The project derives it's configuration from the configuration-service. We have d
 
 Important dependencies in classpath
 * spring-cloud-config-client dependency so that the application can consume the config server
-* spring-cloud-starter-eureka dependecy to register the service in discovery server 
+* spring-cloud-starter-eureka dependecy to register the service in discovery server
