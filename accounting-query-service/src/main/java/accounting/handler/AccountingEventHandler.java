@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import accounting.dao.AccountsDao;
+import accounting.model.Account;
 import accounts.event.AccountAddedEvent;
 import accounts.event.AccountUpdatedEvent;
 
@@ -23,12 +25,20 @@ public class AccountingEventHandler {
 	@Autowired
     DataSource dataSource;
 	
+	@Autowired
+	AccountsDao accountsDao;
+	
 	@SuppressWarnings("rawtypes")
 	@EventHandler
     public void handleAccountUpdatedEvent(AccountUpdatedEvent event, 
     		Message eventMessage, @Timestamp DateTime moment) {
 		
 		LOG.info("Received AccountUpdatedEvent in Accounting-Query-Service");
+		this.updateAccountWithJdbcTemplate(event);
+		//this.updateAccountWithDao(event);
+	}
+	
+	private void updateAccountWithJdbcTemplate(AccountUpdatedEvent event){
 		String accountNumber = event.getAccountNumber();
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -36,12 +46,17 @@ public class AccountingEventHandler {
 		Double balance = (Double)jdbcTemplate.queryForObject(retrieveStatement, new Object[] { accountNumber }, Double.class);
 		
 		// update account
-		//double balance = 10000;
 		double currentBalance = balance - event.getAmount();
 		String updateStatement = "UPDATE accounts SET balance = ? where account_number = ? ";
 		jdbcTemplate.update(updateStatement, new Object[]{currentBalance, accountNumber});
 		LOG.info("Updated Balance for account:"+accountNumber);
-		
+	}
+	
+	private void updateAccountWithDao(AccountUpdatedEvent event){
+		Account account = new Account();
+		account.setAccountNumber(event.getAccountNumber());
+		account.setCustomerId(event.getCustomerId());
+		accountsDao.updateAccountBalance(new Account(), event.getAmount());
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -50,7 +65,11 @@ public class AccountingEventHandler {
     		Message eventMessage, @Timestamp DateTime moment) {
 		
 		LOG.info("Received AccountAddedEvent in Accounting-Query-Service");
-		
+		this.addAccountWithJdbcTemplate(event);
+		//this.addAccountWithDao(event);
+	}
+	
+	private void addAccountWithJdbcTemplate(AccountAddedEvent event){
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		// insert account
@@ -59,7 +78,15 @@ public class AccountingEventHandler {
 		double balance = 10000;
 		String insertStatement = "INSERT INTO accounts VALUES (?,?,?,?)";
 		jdbcTemplate.update(insertStatement, new Object[]{accountNumber, "SAVINGS", customerId, balance});
-				
 		
+	}
+	
+	private void addAccountWithDao(AccountAddedEvent event){
+		Account account = new Account();
+		account.setAccountNumber(event.getAccountNumber());
+		account.setCustomerId(event.getCustomerId());
+		account.setAccountType("CHECKING");
+		account.setBalance(10000);
+		accountsDao.createAccount(account);
 	}
 }
