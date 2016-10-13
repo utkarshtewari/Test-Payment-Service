@@ -1,0 +1,26 @@
+server:
+  port: 9093
+  
+management:
+    port: 9094
+    address: 127.0.0.1
+  
+spring:
+    application:
+        exchange: payments.events.fanout.exchange
+        queue: screening.default.queue
+        databaseName: paymentsdb
+        eventsCollectionName: events
+        snapshotCollectionName: snapshots
+    rabbitmq:
+        hostname: localhost
+        username: guest
+        password: guest
+      
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+        org.axonframework: INFO
+        payments: INFO
+    file: ./logs/screening-service.log

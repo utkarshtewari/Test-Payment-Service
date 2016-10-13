@@ -1,0 +1,46 @@
+server:
+  port: 9090
+  
+management:
+    port: 9091
+    address: 127.0.0.1
+  
+spring:
+    application:
+        exchange: payments.events.fanout.exchange
+        queue: payments.default.queue
+        databaseName: paymentsdb
+        eventsCollectionName: events
+        snapshotCollectionName: snapshots
+    rabbitmq:
+        hostname: localhost
+        username: guest
+        password: guest
+    data:
+        mongodb:
+            uri: mongodb://localhost:27017/paymentsdb
+    datasource:
+        url: jdbc:h2:~/paymentsdb
+        username: sa
+        password:
+
+#        url: jdbc:h2:mem:exploredb
+#        driverClassName: org.h2.Driver
+#        username: sa
+#        password:
+#        validation-query: SELECT 1;
+#        initial-size: 2
+#        sql-script-encoding: UTF-8
+#    jpa:
+#        database: h2
+#        show-sql: true
+#        hibernate:
+#            ddl-auto: create
+      
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+        org.axonframework: INFO
+        payments: INFO
+    file: ./logs/payments-service.log

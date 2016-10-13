@@ -1,0 +1,43 @@
+server:
+  port: 12000
+  
+management:
+    port: 12001
+    address: 127.0.0.1
+  
+spring:
+    application:
+        exchange: payments.events.fanout.exchange
+        queue: accounts.query.queue
+        #databaseName: accountsdb
+        eventsCollectionName: events
+        snapshotCollectionName: snapshots
+    rabbitmq:
+        hostname: localhost
+        username: guest
+        password: guest
+    datasource:
+        url: jdbc:h2:~/accountsdb
+        username: sa
+        password:
+      
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+        org.axonframework: INFO
+        payments: INFO
+    file: ./logs/accounting-query-service.log
+    
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+      
