@@ -26,7 +26,7 @@ public class DbConfiguration {
     @PostConstruct
     private void init(){
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.execute("create table payments_view (payment_id VARCHAR, account_number VARCHAR, customer_id VARCHAR, customer_name VARCHAR, amount FLOAT, status VARCHAR)");
+        jdbcTemplate.execute("create table if not exists payments_view (payment_id VARCHAR, account_number VARCHAR, customer_id VARCHAR, customer_name VARCHAR, amount FLOAT, status VARCHAR)");
         LOG.info("Created table payments_view");
     }
 }
