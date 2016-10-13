@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import accounting.dao.AccountsDao;
-import accounting.model.Account;
 import accounts.event.AccountAddedEvent;
 import accounts.event.AccountUpdatedEvent;
 
@@ -52,12 +51,12 @@ public class AccountingEventHandler {
 		LOG.info("Updated Balance for account:"+accountNumber);
 	}
 	
-	private void updateAccountWithDao(AccountUpdatedEvent event){
-		Account account = new Account();
-		account.setAccountNumber(event.getAccountNumber());
-		account.setCustomerId(event.getCustomerId());
-		accountsDao.updateAccountBalance(new Account(), event.getAmount());
-	}
+//	private void updateAccountWithDao(AccountUpdatedEvent event){
+//		Account account = new Account();
+//		account.setAccountNumber(event.getAccountNumber());
+//		account.setCustomerId(event.getCustomerId());
+//		accountsDao.updateAccountBalance(new Account(), event.getAmount());
+//	}
 	
 	@SuppressWarnings("rawtypes")
 	@EventHandler
@@ -81,12 +80,12 @@ public class AccountingEventHandler {
 		
 	}
 	
-	private void addAccountWithDao(AccountAddedEvent event){
-		Account account = new Account();
-		account.setAccountNumber(event.getAccountNumber());
-		account.setCustomerId(event.getCustomerId());
-		account.setAccountType("CHECKING");
-		account.setBalance(10000);
-		accountsDao.createAccount(account);
-	}
+//	private void addAccountWithDao(AccountAddedEvent event){
+//		Account account = new Account();
+//		account.setAccountNumber(event.getAccountNumber());
+//		account.setCustomerId(event.getCustomerId());
+//		account.setAccountType("CHECKING");
+//		account.setBalance(10000);
+//		accountsDao.createAccount(account);
+//	}
 }
