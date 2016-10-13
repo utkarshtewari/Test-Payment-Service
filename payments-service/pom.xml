@@ -11,12 +11,6 @@
 	<name>payments-service</name>
 	<description>Payments Service</description>
 
-	<!-- <parent>
-		<groupId>microservices</groupId>
-		<artifactId>Janus-ReactiveMicroservices</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent> -->
 	<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -61,19 +55,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- <dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
 		
 		<dependency>
 		    <groupId>com.h2database</groupId>
 		    <artifactId>h2</artifactId>
 		    <version>1.4.192</version>
 		</dependency>
-		
 
 		<!-- axon jars -->
 		<dependency>
@@ -162,5 +149,33 @@
             </plugin>
         </plugins>
     </build>
+	<repositories>
+		<repository>
+			<id>spring-release</id>
+			<url>http://repo.spring.io/release/</url>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-release</id>
+			<url>http://repo.spring.io/release/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+    </pluginRepositories>
 
 </project>
