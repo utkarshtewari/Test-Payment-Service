@@ -41,15 +41,6 @@ public class AxonConfiguration {
     @Value("${spring.application.exchange}")
     private String exchangeName;
 
-    @Value("${spring.application.databaseName}")
-    private String databaseName;
-
-    @Value("${spring.application.eventsCollectionName}")
-    private String eventsCollectionName;
-
-    @Value("${spring.application.snapshotCollectionName}")
-    private String snapshotCollectionName;
-
     @Bean
     JacksonSerializer axonJsonSerializer() {
         return new JacksonSerializer();

@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -33,20 +34,27 @@ public class PaymentEventHandler {
     		Message eventMessage, @Timestamp DateTime moment) {
 		
 		LOG.info("Received PaymentAddedEvent checking datasource:");
+		// TODO - Move the database updates to DAO
+		try {
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+			
+			String paymentId = event.getPaymentId();
+			String accountNumber = event.getAccountNumber();
+			String customerId = event.getCustomerId();
+			String customerName = event.getCustomerName();
+			double amount = event.getAmount();
+			
+			String insertStatement = "INSERT INTO payments_view VALUES (?,?,?,?,?,?)";
+			jdbcTemplate.update(insertStatement, new Object[]{paymentId, accountNumber, customerId, customerName, amount, "PENDING"});
+			
+			LOG.info("Inserted Payment for payment id:"+paymentId);
+		}
+		catch(DataAccessException ex){
+			LOG.error("DataAccessException for inserting a Payment", ex);
+		}catch(Exception ex){
+			LOG.error("Exception occured for inserting a Payment", ex);
+		}
 		
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		
-		String paymentId = event.getPaymentId();
-		String accountNumber = event.getAccountNumber();
-		String customerId = event.getCustomerId();
-		String customerName = event.getCustomerName();
-		double amount = event.getAmount();
-		
-		String insertStatement = "INSERT INTO payments_view VALUES (?,?,?,?,?,?)";
-		
-		jdbcTemplate.update(insertStatement, new Object[]{paymentId, accountNumber, customerId, customerName, amount, "PENDING"});
-		
-		LOG.info("Inserted Payment for payment id:"+paymentId);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -54,16 +62,22 @@ public class PaymentEventHandler {
     public void handlePaymentCanceledEvent(PaymentCanceledEvent event, 
     		Message eventMessage, @Timestamp DateTime moment) {
 		
+		// TODO - Move the database updates to DAO
 		LOG.info("Received PaymentCanceledEvent checking datasource:");
 		
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		
-		String paymentId = event.getPaymentId();
-		//String accountNumber = event.getAccountNumber();
-		
-		String updateStatement = "UPDATE payments_view SET status = ? where payment_id = ? ";
-		jdbcTemplate.update(updateStatement, new Object[]{"CANCELED", paymentId});
-		LOG.info("Updated Payment for payment id:"+paymentId);
+		try {
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+			
+			String paymentId = event.getPaymentId();
+			String updateStatement = "UPDATE payments_view SET status = ? where payment_id = ? ";
+			jdbcTemplate.update(updateStatement, new Object[]{"CANCELED", paymentId});
+			LOG.info("Updated Payment for payment id:"+paymentId);
+		}
+		catch(DataAccessException ex){
+			LOG.error("DataAccessException for updating a Payment", ex);
+		}catch(Exception ex){
+			LOG.error("Exception occured for updating a Payment", ex);
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -72,8 +86,6 @@ public class PaymentEventHandler {
     		Message eventMessage, @Timestamp DateTime moment) {
 		
 		LOG.info("Received PaymentScreenedEvent for Payment Id:"+ event.getPaymentId());
-		
-		
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -82,8 +94,6 @@ public class PaymentEventHandler {
     		Message eventMessage, @Timestamp DateTime moment) {
 		
 		LOG.info("Received PaymentAccountedEvent for Payment Id:"+ event.getPaymentId());
-		
-		
 	}
 	
 	@SuppressWarnings("rawtypes")
