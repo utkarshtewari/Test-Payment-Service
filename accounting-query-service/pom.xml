@@ -62,7 +62,6 @@
 			<scope>runtime</scope>
 		</dependency> -->
 
-		<!-- axon jars -->
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-core</artifactId>
