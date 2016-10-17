@@ -37,7 +37,8 @@ Architecture consists of business services and backing services from Pilot-Micro
 * Today’s most popular services—from Twitter to Apple Siri—are distributed by default, and designed for unprecedented numbers of concurrent users, data volumes and speeds. The characteristics of Reactive systems — designed to be [Responsive, Resilient, Elastic and Message Driven] (http://www.reactivemanifesto.org/) to support these new extremes and they are becoming popular for bringing new software to market.
 
 ## <a name="cqrs"></a> Command Query Responsibility Segregation
-* CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
+CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
+
 * Queries—methods that return a result and do not change the system state.
 * Commands—methods that change the system state but do not return values.
 
