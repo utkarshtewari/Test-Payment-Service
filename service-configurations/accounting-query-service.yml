@@ -9,9 +9,6 @@ spring:
     application:
         exchange: payments.events.fanout.exchange
         queue: accounts.query.queue
-        #databaseName: accountsdb
-        eventsCollectionName: events
-        snapshotCollectionName: snapshots
     rabbitmq:
         hostname: localhost
         username: guest
@@ -26,7 +23,7 @@ logging:
         root: INFO
         org.springframework: INFO
         org.axonframework: INFO
-        payments: INFO
+        accounting: INFO
     file: ./logs/accounting-query-service.log
     
 eureka:
