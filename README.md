@@ -14,6 +14,7 @@ This sample project showcases `event-driven` microservices to build distributed 
 * [Event Sourcing] (#event-sourcing) 
 * [Command Query Responsibility Segregation] (#cqrs)
 
+
 ## <a name="application-architecture"></a> Application Architecture
 This project introduced is about a fictitious `Payment` execution application. Payments can be added for payment execution, stored, retrieved using RESTful API service. As changes happen for example payment screening and accounts updates for the payment amount, notifications are sent to interested services using messaging.
 
@@ -35,11 +36,16 @@ Architecture consists of business services and backing services from Pilot-Micro
 ## <a name="reactive-principles"></a> Reactive Principles 
 * Today’s most popular services—from Twitter to Apple Siri—are distributed by default, and designed for unprecedented numbers of concurrent users, data volumes and speeds. The characteristics of Reactive systems — designed to be [Responsive, Resilient, Elastic and Message Driven] (http://www.reactivemanifesto.org/) to support these new extremes and they are becoming popular for bringing new software to market.
 
+## <a name="cqrs"></a> Command Query Responsibility Segregation
+* CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
+* Queries—methods that return a result and do not change the system state.
+* Commands—methods that change the system state but do not return values.
+
+The events are persisted into the event repository. The business model database can therefore contain the last state of the system, but the event repository keeps the whole history of the data. With this separation of concerns, the developer is free to choose the most appropriate technology for each pattern component, and can (if desired) build a polyglot application. In this example it uses Mongo DB for event repository and H2 database as query database.
+
 ## <a name="event-scourcing"></a> Event Sourcing 
 * Event Sourcing is architecture pattern that represents state as series of events. In event-sourcing, events are the sole record of state for the system. They are used by the system to describe and re-build the current state of any entity on demand (by replaying it’s past events one at a time until all previous events have been re-applied). 
 
-## <a name="cqrs"></a> Command Query Responsibility Segregation
-* CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result.
 
 ## Using the Application
 
