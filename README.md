@@ -3,16 +3,14 @@ The high level of autonomy and isolation present in the Microservices Architectu
 
 A microservice must react to failure, react to load and react to user. It should also be able to manage data consistency using transactions that are distributed across a network of many different applications and databases.
 
-To achieve the above properties, it is important to have an asynchronous boundary, that can provide decoupling of services. There are tried and tested patterns for successfully building and maintaining complex distributed systems using Event Sourcing and Command Query Responsibility Segregation (CQRS). 
+To achieve the above properties, it is important to have an asynchronous boundary, that can provide decoupling of services. There are tried and tested patterns for successfully building and maintaining complex distributed systems such as Event Sourcing and Command Query Responsibility Segregation (CQRS).
 
-This sample project showcases `event-driven` microservices to build distributed resilient applications using Event Sourcing and Command Query Responsibility Segregation (CQRS) patterns.
+This sample project showcases `event-driven` microservices and uses these patterns to maximize the performance and scalability of microservices.
 
 ## Table of Contents
 * [Application Architecture](#application-architecture)
 * [Architecture Components](#architecture-components)
 * [Reactive Principles] (#reactive-principles) 
-* [Command Query Responsibility Segregation] (#cqrs)
-* [Event Sourcing] (#event-sourcing) 
 
 ## <a name="application-architecture"></a> Application Architecture
 This project introduced is about a fictitious `Payment` execution application. Payments can be added for payment execution, stored, retrieved using RESTful API service. As changes happen for example payment screening and accounts updates for the payment amount, notifications are sent to interested services using messaging.
@@ -33,19 +31,19 @@ Architecture consists of business services and backing services from Pilot-Micro
 * [Screening Service] (screening-service/README.md) - Screening Service responsible for screening a payment, consumes PaymentAddedEvent and generates PaymentScreenedEvent. 
 
 ## <a name="reactive-principles"></a> Reactive Principles 
-* Today’s most popular services—from Twitter to Apple Siri—are distributed by default, and designed for unprecedented numbers of concurrent users, data volumes and speeds. The characteristics of Reactive systems — designed to be [Responsive, Resilient, Elastic and Message Driven] (http://www.reactivemanifesto.org/) to support these new extremes and they are becoming popular for bringing new software to market.
+Today’s most popular services—from Twitter to Apple Siri—are distributed by default, and designed for unprecedented numbers of concurrent users, data volumes and speeds. The characteristics of Reactive systems — designed to be [Responsive, Resilient, Elastic and Message Driven] (http://www.reactivemanifesto.org/) to support these new extremes and they are becoming popular for bringing new software to market.
 
-## <a name="cqrs"></a> Command Query Responsibility Segregation
+This project showcases usage of various patterns (listed below) to build Reactive Microservices 
+
+#### <a name="event-scourcing"></a> Event Sourcing 
+Event Sourcing an architecture pattern, represents state as series of events. In event-sourcing, events are the sole record of state for the system. They are used by the system to describe and re-build the current state of any entity on demand (by replaying it’s past events one at a time until all previous events have been re-applied). 
+
+#### <a name="cqrs"></a> Command Query Responsibility Segregation
 CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
-
 * Queries—methods that return a result and do not change the system state.
 * Commands—methods that change the system state but do not return values.
 
-The events are persisted into the event repository. The business model database can therefore contain the last state of the system, but the event repository keeps the whole history of the data. With this separation of concerns, the developer is free to choose the most appropriate technology for each pattern component, and can (if desired) build a polyglot application. In this example it uses Mongo DB for event repository and H2 database as query database.
-
-## <a name="event-scourcing"></a> Event Sourcing 
-* Event Sourcing is architecture pattern that represents state as series of events. In event-sourcing, events are the sole record of state for the system. They are used by the system to describe and re-build the current state of any entity on demand (by replaying it’s past events one at a time until all previous events have been re-applied). 
-
+Queries and commands can be decoupled by the events generated by the command processing that feed the repositories for query data.
 
 ## Using the Application
 
