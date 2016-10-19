@@ -36,10 +36,10 @@ Today’s most popular services—from Twitter to Apple Siri—are distributed b
 This project showcases usage of various patterns (listed below) to build Reactive Microservices 
 
 #### <a name="event-scourcing"></a> Event Sourcing 
-Event Sourcing an architecture pattern, represents state as series of events. In event-sourcing, events are the sole record of state for the system. They are used by the system to describe and re-build the current state of any entity on demand (by replaying it’s past events one at a time until all previous events have been re-applied). 
+[Event Sourcing] (https://msdn.microsoft.com/en-us/library/jj591559.aspx) an architecture pattern, represents state as series of events. In event-sourcing, events are the sole record of state for the system. They are used by the system to describe and re-build the current state of any entity on demand (by replaying it’s past events one at a time until all previous events have been re-applied). 
 
 #### <a name="cqrs"></a> Command Query Responsibility Segregation
-CQRS is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
+[CQRS] (https://msdn.microsoft.com/en-us/library/jj591577.aspx) is based in Bertrand Meyer's CQS (Command-Query Separation) concept. CQS states that every method should either be a command that performs an action or a query that retrieves a result. The basic idea is to divide the operations that act on a domain object into two distinct categories:
 * Queries—methods that return a result and do not change the system state.
 * Commands—methods that change the system state but do not return values.
 
