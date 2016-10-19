@@ -10,21 +10,29 @@ Payments Service exposes REST endpoints to execute a payment and to retrieve a l
 ![Payments Service Logical Architecture](PaymentsService-LogicalDiagram.png)
 
 ## Pre-requisites
-* Install MongoDB
-
-* Create paymentsdb schema
-  * Connect mongo db using terminal window command >mongo
+* Install MongoDB 
+  * Connect mongo db using terminal window command 'mongo'
   * Use command 'use paymentsdb' to create payments schema
+  
+* Install H2 database
+  * There is no need to create a table as this will be done by init() method in DbConfiguration on running the payments-service jar
   
 ## Running the application
 * Build the application by running the command: mvn clean install
 * Run the application by running the command: java -jar build/libs/payments-service-0.0.1-SNAPSHOT.jar
 
 * Post a payment by invoking the service by using the below urls
-  * http://localhost:9090/payments
+  * http://localhost:9090/payments-service/accounts/{accountNumber}/payments/
+  * Sample payment message 
+{
+"paymentId" : "123123123", 
+"customerId" : "Customer Id 123", 
+"customerName" : "TestCustomer 12", 
+"amount" : 100
+}
 
 * Retrieve a list of Payments
-  * http://localhost:9090/payments
+  * http://localhost:9090/payments-service/accounts/{accountNumber}/payments/
 
 ## External Configuration
 The project derives it's configuration from the configuration-service. We have defined the spring.cloud.config.uri in the bootstrap.yml file and that tells the application where to pick up the external configurations. In our case, the URL points to the running configuration-service (http://localhost:8888). 
