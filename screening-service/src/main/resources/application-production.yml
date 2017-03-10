@@ -1,0 +1,39 @@
+server:
+  port: 9080
+  
+management:
+    port: 9094
+    address: 127.0.0.1
+  
+spring:
+    application:
+        exchange: payments.events.fanout.exchange
+        queue: screening.default.queue
+        databaseName: paymentsdb
+        eventsCollectionName: events
+        snapshotCollectionName: snapshots
+    rabbitmq:
+        hostname: rabbitmq
+        username: test
+        password: password
+      
+logging:
+    level:
+        root: INFO
+        org.springframework: INFO
+        org.axonframework: INFO
+        payments: INFO
+    file: ./logs/screening-service.log
+    
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+          
