@@ -1,0 +1,84 @@
+version: "3"
+
+services:
+  rabbitmq: 
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=test
+      - RABBITMQ_DEFAULT_PASS=password
+
+  mongodb:
+    image: mongo-3-2
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  h2:
+    container_name: h2
+    hostname: h2
+    image: 1000kit/h2
+    ports:
+      - "8181:8181"
+      - "1521:1521"
+    volumes:
+     - h2-data:/opt/h2-data
+
+  accounting-command-service:
+    image: accounting-command-service
+    container_name: accounting-command-service
+    links:
+      - mongodb
+      - rabbitmq 
+    expose:
+     - "9095"
+    ports:
+     - "9095:9095"
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+
+  accounting-query-service:
+    image: accounting-query-service
+    container_name: accounting-query-service
+    links:
+      - h2
+      - rabbitmq 
+    expose:
+     - "12000"
+    ports:
+     - "12000:12000"
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+
+  screening-service:
+    image: screening-service
+    container_name: screening-service
+    links:
+      - mongodb
+      - rabbitmq 
+    expose:
+     - "9080"
+    ports:
+     - "9080:9080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+
+  payments-service:
+    image: payments-service
+    container_name: payments-service
+    links:
+      - mongodb
+      - rabbitmq 
+      - h2 
+    expose:
+     - "9090"
+    ports:
+     - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+
+volumes:
+  h2-data:
